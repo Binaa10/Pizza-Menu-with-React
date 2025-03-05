@@ -55,6 +55,7 @@ export default function App() {
     <div className="container">
       <Header />
       <Menu />
+      <Footer />
     </div>
   );
 }
@@ -63,7 +64,7 @@ function Header() {
   //const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
   const style = {};
   return (
-    <header className="header">
+    <header className="header footer">
       <h1 style={style}>FAST REACT PIZZA CO.</h1>
     </header>
   );
@@ -73,11 +74,32 @@ function Menu() {
   return (
     <main className="menu">
       <h2>OUR MENU</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Footer />
+      <Pizza
+        name="Pizza spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price={10}
+      />
+      <Pizza
+        name="salamino"
+        ingredients="mushromm,bina"
+        photoName="pizzas/salamino.jpg"
+        price={12}
+      />
     </main>
+  );
+}
+
+function Pizza(props) {
+  return (
+    <div className="pizza">
+      <img src={props.photoName} alt={props.name} />
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price + 3}</span>
+      </div>
+    </div>
   );
 }
 
@@ -96,14 +118,4 @@ function Footer() {
     </footer>
   );
   // return React.createElement("footer", null, "We are currently open!");
-}
-
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="Pizza spinaci" />
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
-  );
 }
