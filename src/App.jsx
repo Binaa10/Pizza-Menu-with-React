@@ -71,10 +71,24 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  const numPizzas = pizzas.length;
+
   return (
     <main className="menu">
       <h2>OUR MENU</h2>
-      <Pizza
+
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <Pizza pizzaobj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      ) : (
+        <p>We are still working on our menu.pls come back later:)</p>
+      )}
+
+      {/* <Pizza
         name="Pizza spinaci"
         ingredients="Tomato, mozarella, spinach, and ricotta cheese"
         photoName="pizzas/spinaci.jpg"
@@ -85,27 +99,28 @@ function Menu() {
         ingredients="mushromm,bina"
         photoName="pizzas/salamino.jpg"
         price={12}
-      />
+      />*/}
     </main>
   );
 }
 
 function Pizza(props) {
+  if (props.pizzaobj.soldOut) return null;
   return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.name} />
+    <li className="pizza">
+      <img src={props.pizzaobj.photoName} alt={props.pizzaobj.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price + 3}</span>
+        <h3>{props.pizzaobj.name}</h3>
+        <p>{props.pizzaobj.ingredients}</p>
+        <span>{props.pizzaobj.price + 3}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 6;
+  const openHour = 9;
   const closedHour = 22;
   const isOpen = hour >= openHour && hour <= closedHour;
 
@@ -114,7 +129,19 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()}.We are currently open
+      {isOpen ? (
+        <div className="order">
+          <p>
+            We are open until {closedHour}:00. Come and visit us or order
+            online.
+          </p>
+          <button className="btn">order</button>
+        </div>
+      ) : (
+        <p>
+          We are happy to welcome you between {openHour}:00 and {closedHour}:00
+        </p>
+      )}
     </footer>
   );
   // return React.createElement("footer", null, "We are currently open!");
