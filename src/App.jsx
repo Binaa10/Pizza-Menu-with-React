@@ -103,7 +103,7 @@ function Menu() {
       />
       <Pizza
         name="salamino"
-        ingredients="mushromm,bina,alex"
+        ingredients="mushromm,bina,alex,bele"
         photoName="pizzas/salamino.jpg"
         price={12}
       />*/}
